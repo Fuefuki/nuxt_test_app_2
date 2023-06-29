@@ -13,7 +13,7 @@ const deleteReview = async (id: string) => {
             id: id,
         }
     })
-    await navigateTo('/lists/')
+    location.reload();
 }
 </script>
 

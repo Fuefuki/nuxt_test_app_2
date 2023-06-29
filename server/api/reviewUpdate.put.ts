@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     const title = params.title
     const body = params.body
 
-    const response = client.update<Review>({
+    await client.update<Review>({
         endpoint: 'reviews',
         contentId: String(id),
         content:{
@@ -15,13 +15,11 @@ export default defineEventHandler(async (event) => {
             body: String(body)
         }
     })
-
-    response
-        .then(function(res){
-            console.log(res.id)
-        })
-        .catch(function(err){
-            console.log (err)
-        })
+    .then(function(res){
+        console.log(res.id)
+    })
+    .catch(function(err){
+        console.log (err)
+    })
     return sendRedirect(event, "/lists/")
 })
