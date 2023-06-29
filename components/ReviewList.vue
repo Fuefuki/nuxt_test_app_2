@@ -5,6 +5,16 @@
         reviews: Review[];
     }
     const { reviews } = defineProps<Props>()
+
+const deleteReview = async (id: string) => {
+    await useFetch('/api/reviewDelete', {
+        method: 'delete',
+        body: { 
+            id: id,
+        }
+    })
+    await navigateTo('/lists/')
+}
 </script>
 
 <template>
@@ -22,6 +32,9 @@
                     <nuxt-link :to="`/lists/${review.id}`">
                         {{ review.title }}
                     </nuxt-link>
+                </td>
+                <td class="p-1">
+                    <button @click="deleteReview(review.id)" class="button-red">削除</button>
                 </td>
             </tr>
         </tbody>
